@@ -1,0 +1,72 @@
+{% extends 'base.html' %}
+
+{% block content %}
+   <!--================Blog Area =================-->
+   <section class="blog_area single-post-area section_padding">
+      <div class="container">
+         <div class="row">
+            <div class="col-lg-8 posts-list">
+               <div class="single-post">
+                  <div class="feature-img">
+                     <img class="img-fluid" src="{{ url_for('static', filename='img/blog/single_blog_1.png') }}" alt="">
+                  </div>
+                  <div class="blog_details">
+                     <h2>Why wear streetwear in India?
+                     </h2>
+                     <p class="excert">
+                     Streetwear in India is still a fairly niche market, and many Indians do not understand the appeal of the
+unique and jarring styles that streetwear employs. We asked one of our customers, Aditi, to shed some
+light on the spirit of streetwear and to explain what streetwear means to her.
+<br><br>
+Bablu Yadav: Why do you love wearing streetwear?
+<br><br>
+Aditi: One thing I appreciate about wearing streetwear in India is the fact that it’s so unique right now.
+Streetwear is all about expressing ourselves with no bars held. We wear streetwear only for ourselves; it’s
+not to appease our employers or to fit in with society. I think streetwear allows me to create my own
+personal style, to an extent that more conventional clothing doesn’t allow.
+<br><br>
+Bablu Yadav: Why do you think streetwear hasn’t taken off in India yet?
+Aditi: I mean, India is obviously still a very conservative place and people, especially women, feel a lot of
+pressure to act and dress a certain way. I actually think that’s something streetwear could help with. It
+pushes the boundaries of what society deems as acceptable, and I think a lot of Indians could benefit by
+questioning the constraints that are placed on us. Obviously it’s only clothing, but even these little things
+make a difference.
+<br><br>
+Bablu Yadav: * silence *
+<br><br>
+Aditi: So, do you have any more questions?
+<br><br>
+Bablu Yadav: * silence *
+<br><br>
+Aditi: Uhh, can I leave now?
+<br><br>
+Bablu Yadav: * silence *
+<br><br>
+Aditi: Err, Ok. I’m just gonna go.
+<br><br>
+Bablu Yadav: * silence *
+<br><br><br><br><br><br><br><br>
+
+<br><br>
+Bablu Yadav: * silence *
+</p>
+                  </div>
+               </div>
+               <div class="blog-author">
+                  <div class="media align-items-center">
+                     <img src="{{ url_for('static', filename='img/DefaultProfileImage.jpg') }}" alt="">
+                     <div class="media-body">
+                        <a href="#">
+                           <h4>Ajay Bennett</h4>
+                        </a>
+                        <p>The greatest living Indian hypebeast. Also a major fan of this site, and one of our biggest customers.</p>
+                     </div>
+                  </div>
+               </div>
+            </div>
+         </div>
+      </div>
+   </section>
+   <!--================Blog Area end =================-->
+
+{% endblock %}

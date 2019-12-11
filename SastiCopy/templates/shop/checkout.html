@@ -1,0 +1,128 @@
+{% extends 'base.html' %}
+
+{% block content %}
+  <!--================Checkout Area =================-->
+  <section class="checkout_area section_padding">
+    <div class="container">
+      <div class="billing_details">
+        <div class="row">
+          <div class="col-lg-8">
+            <h3>Shipping Details</h3>
+            <form class="row contact_form" action="#" method="post" novalidate="novalidate">
+              <div class="col-md-6 form-group p_star">
+                <input type="text" class="form-control" id="first" name="name" />
+                <span class="placeholder" data-placeholder="First name"></span>
+              </div>
+              <div class="col-md-6 form-group p_star">
+                <input type="text" class="form-control" id="last" name="name" />
+                <span class="placeholder" data-placeholder="Last name"></span>
+              </div>
+              <div class="col-md-6 form-group p_star">
+                <input type="text" class="form-control" id="number" name="number" />
+                <span class="placeholder" data-placeholder="Phone number"></span>
+              </div>
+              <div class="col-md-6 form-group p_star">
+                <input type="text" class="form-control" id="email" name="compemailany" />
+                <span class="placeholder" data-placeholder="Email Address"></span>
+              </div>
+              <div class="col-md-12 form-group p_star">
+                <input type="text" class="form-control" id="add1" name="add1" />
+                <span class="placeholder" data-placeholder="Address line 1"></span>
+              </div>
+              <div class="col-md-12 form-group p_star">
+                <input type="text" class="form-control" id="add2" name="add2" />
+                <span class="placeholder" data-placeholder="Address line 2"></span>
+              </div>
+              <div class="col-md-12 form-group p_star">
+                <input type="text" class="form-control" id="city" name="city" onfocus="this.placeholder=''" />
+                <span class="placeholder" data-placeholder="Town/City"></span>
+              </div>
+              <div class="col-md-12 form-group p_star">
+              <span class="placeholder" data-placeholder="State"></span>
+                <select class="country_select">
+                  <option value="1"></option>
+                  <option value="2">Delhi</option>
+                  <option value="2">Haryana</option>
+                  <option value="4">Uttar Pradesh</option>
+                  <option value="5">Other</option>
+                </select>
+              </div>
+              <div class="col-md-12 form-group">
+                <input type="text" class="form-control" id="zip" name="zip" placeholder="ZIP" />
+              </div>
+                <div class="col-md-12 form-group p_star">
+                <select class="country_select">
+                  <option value="1">India</option>
+                </select>
+              </div>
+
+              <div class="col-md-12 form-group">
+                <div class="creat_account">
+                </div>
+              </div>
+              <div class="col-md-12 form-group">
+              </div>
+            </form>
+          </div>
+          <div class="col-lg-4">
+            <div class="order_box">
+            			<table class="tbl-cart" cellpadding="10" cellspacing="1">
+			<tbody>
+				<tr>
+					<th style="text-align:center;" width="5%">Name</th>
+					<th style="text-align:center;" width="5%">Qty.</th>
+					<th style="text-align:center;" width="10%">Price</th>
+					<th style="text-align:center;" width="5%">Remove</th>
+				</tr>
+				{% for key, val in session['cart_item'].items() %}
+					{% set quantity = session['cart_item'][key]['quantity'] %}
+					{% set price = session['cart_item'][key]['price'] %}
+					{% set item_price = session['cart_item'][key]['total_price'] %}					
+					<tr>
+						<td col width = "40%" style="text-align:center;">{{ session['cart_item'][key]['name'] }}</td>
+						<td style="text-align:center;" col width = "10%">{{ quantity }}</td>
+						<td  style="text-align:center;" col width = "20%">₹ {{ item_price }}</td>
+						<td style="text-align:center;">
+							<a href="{{ url_for('.delete_product', code=session['cart_item'][key]['code']) }}" class="btnRemoveAction">
+								<img src="/static/img/delete.svg" alt="Remove Item" style = "width: 50%;" />
+							</a>
+						</td>
+					</tr>
+				{% endfor %}
+				<tr>
+						<td col width = "20%"></td>
+						<td col width = "40%" style="text-align:center;"></td>
+						<td style="text-align:center;" col width = "20%">Total:</td>
+						<td  style="text-align:center;" col width = "20%"><strong>₹ {{ session['all_total_price'] }}<strong></td>
+						
+					</tr>
+			</tbody>
+			</table>
+              <div class="payment_item">
+                <div class="radion_btn">
+                  <input type="radio" id="f-option5" name="selector" />
+                  <label for="f-option5">Cash on Delivery</label>
+                  <div class="check"></div>
+                </div>
+              </div>
+              <div class="payment_item active">
+                <div class="radion_btn">
+                  <input type="radio" id="f-option6" name="selector" />
+                  <label for="f-option6">Electronic payment </label>
+                  <div class="check"></div>
+                </div>
+              </div>
+              <div class="creat_account">
+                <label for="f-option4"> </label>
+                <a href=""></a>
+              </div>
+              <a class="btn_3" href="/">Confirm Order</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  <!--================End Checkout Area =================-->
+
+{% endblock %}

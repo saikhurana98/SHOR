@@ -1,0 +1,102 @@
+{% extends 'base.html' %}
+
+{% block content %}
+  <!--================Single Product Area =================-->
+  <div class="product_image_area section_padding">
+    <div class="container">
+      <div class="row s_product_inner">
+        <div class="col-lg-5">
+          <div class="product_slider_img">
+            <div id="vertical">
+              <div data-thumb="{{products.image}}">
+                <img src="{{products.image}}" />
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col-lg-5 offset-lg-1">
+          <div class="s_product_text">
+            <h3>{{products.name}}</h3>
+            <h2>₹ {{products.price}}</h2>
+            <ul class="list">
+              <li>
+                <a href="#"> <span>Availibility</span> : In Stock</a>
+                
+              </li>
+              <li>
+              <a href="#"> <span>Ships within:</span> : 5 - 7 days</a>
+              </li>
+            </ul>
+            <p> {{products.describe}}
+            </p>
+              
+              <form method="post" action="/shop/add">
+					<div class="product-tile-footer">
+						<div class="add_to_cart">
+							<input type="hidden" name="id" value="{{ products.id }}"/>
+							<input type="number" class="product_count d-inline-block" name="quantity" value="1" min="1" size="2" style="width: 15%;"/>
+							<input type="submit" value="Add to Cart" class="btn_3" />
+						</div>
+					</div>
+				</form>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!--================End Single Product Area =================-->
+
+
+
+  <!-- shipping details part end-->
+  <section class="shipping_details section_padding border_top">
+      <div class="container">
+          <div class="row">
+              <div class="col-lg-3 col-sm-6">
+                  <div class="single_shopping_details">
+                        <img src="{{ url_for('static', filename='img/icon/icon_1.png') }}" alt="">
+                        <h4>Free shipping</h4>
+                        <p>To anywhere in India.
+Always.
+
+</p>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-sm-6">
+                    <div class="single_shopping_details">
+                        <img src="{{ url_for('static', filename='img/icon/icon_2.png') }}" alt="">
+                        <h4>Not happy?</h4>
+                        <p>
+Unhappy with your purchase?
+Send it back within 7 days for
+a full refund.
+
+
+</p>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-sm-6">
+                    <div class="single_shopping_details">
+                        <img src="{{ url_for('static', filename='img/icon/icon_3.png') }}" alt="">
+                        <h4>Cards welcome</h4>
+                        <p>Make secure and effortless payments
+using all major cards.
+
+</p>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-sm-6">
+                    <div class="single_shopping_details">
+                        <img src="{{ url_for('static', filename='img/icon/icon_4.png') }}" alt="">
+                        <h4>Swift customer service</h4>
+                        <p>We'll get back to any customer
+query within 24 hours.
+                  </div>
+              </div>
+          </div>
+      </div>
+  </section>
+  <!-- shipping details part end-->
+
+{% endblock %}

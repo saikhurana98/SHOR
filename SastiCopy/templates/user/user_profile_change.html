@@ -1,0 +1,21 @@
+Here's where the form to be able to change the user's data goes.
+
+Display the data
+
+{% extends 'base.html' %}
+{% block content %}
+<html>
+<body>
+{% for product in products %}
+<h5>{{product.username}}</h5>
+
+<form method="post" action="/user/profile_change">
+<input type="text" name="name" value="1"/>
+<input type="submit" value = "Edit name"/>
+</form>
+
+</body>
+{% endfor %}
+</html>
+
+{% endblock %}

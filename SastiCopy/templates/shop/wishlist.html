@@ -1,0 +1,192 @@
+<!doctype html>
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>{% block title %}{% endblock %} SHOR: Indian Streetwear </title>
+    <link rel="icon" href="{{ url_for('static', filename='img/favicon.png') }}">
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/bootstrap.min.css') }}">
+    <!-- animate CSS -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/animate.css') }}">
+    <!-- owl carousel CSS -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/owl.carousel.min.css') }}">
+    <!-- font awesome CSS -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/all.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/nice-select.css') }}">
+    <!-- flaticon CSS -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/flaticon.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/themify-icons.css') }}">
+    <!-- font awesome CSS -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/magnific-popup.css') }}">
+    <!-- swiper CSS -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/slick.css') }}">
+    <!-- swiper CSS -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/price_rangs.css') }}">
+    <!-- style CSS -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+
+<body class="bg-white">
+
+    <!--::header part start::-->
+    <header class="main_menu home_menu" style = "background-color: #6D160E;">
+        <div class="container-fluid">
+            <div class="row align-items-center justify-content-center">
+                <div class="col-lg-11">
+                    <nav class="navbar navbar-expand-lg navbar-light">
+                        <a class="navbar-brand" href="/"> <img src="{{ url_for('static', filename='img/logo.svg') }}" alt="logo" style="width: 45%;"> </a>
+                        <button class="navbar-toggler" type="button" data-toggle="collapse"
+                            data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
+                            aria-expanded="false" aria-label="Toggle navigation">
+                            <span class="menu_icon"><i class="fas fa-bars"></i></span>
+                        </button>
+
+                        <div class="collapse navbar-collapse main-menu-item" id="navbarSupportedContent">
+                            <ul class="navbar-nav" style = "margin-left: 75%; position: relative;">
+                                <li class="nav-item dropdown">
+                                        <a class="nav-link" href="/user/tracking">Track order</a>
+                                </li>
+
+
+                                <li class = "nav-item" style="text-decoration: none;">
+                                {% if g.user %}
+								  <a class="nav-link" href="{{ url_for('auth.logout') }}">
+									  Logout
+								  </a>
+								{% else %}
+								<a class="nav-link" href="{{ url_for('auth.register') }}">
+									Sign up or Login
+								</a>
+								  {#<a class="nav-link" href="{{ url_for('auth.login') }}">
+									  Login
+								  </a>#}
+								{% endif %}
+								</li>
+                            </ul>
+                        
+                        
+
+
+                        
+                        
+						</div>
+						<div class="hearer_icon d-flex">
+                            <div class="dropdown cart">
+                                <a href="/shop/cart" id="navbarDropdown3">
+                                    <img src = '/static/img/shopping-cart.svg' style = 'width: 25.59px; float: right;'></i>
+                                </a>
+                                <!-- <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                    <div class="single_product">
+                                    </div>
+                                </div> -->
+                            </div>
+                        </div>
+                    </nav>
+                </div>
+            </div>
+        </div>
+    </header>
+    <!-- Header part end-->
+
+{% for message in get_flashed_messages() %}
+  <div class="flash"> {{message}}</div>
+{% endfor %}
+
+  <section class="cart_area section_padding">
+    <div class="container">
+      <div class="cart_inner">
+        <div class="table-responsive">
+          <table class="table">
+            <thead>
+            <h2> Shopping Cart </h2>
+            </thead>
+            
+
+			{% if 'cart_item' in session %}
+			<table class="tbl-cart" cellpadding="10" cellspacing="1">
+			<tbody>
+				<tr>
+					<th style="text-align:center;" width = "5%">Product</th>
+					<th style="text-align:center;" width="5%">Name</th>
+					<th style="text-align:center;" width="10%">Quantity</th>
+					<th style="text-align:center;" width="10%">Price</th>
+					<th style="text-align:center;" width="5%">Remove</th>
+				</tr>
+				{% for key, val in session['cart_item'].items() %}
+					{% set quantity = session['cart_item'][key]['quantity'] %}
+					{% set price = session['cart_item'][key]['price'] %}
+					{% set item_price = session['cart_item'][key]['total_price'] %}					
+					<tr>
+						<td col width = "20%"><img src="{{ session['cart_item'][key]['image'] }}" class="cart-item-image" style = "width: 100%;" border="5" /></td>
+						<td col width = "40%" style="text-align:center;">{{ session['cart_item'][key]['name'] }}</td>
+						<td style="text-align:center;" col width = "20%">{{ quantity }}</td>
+						<td  style="text-align:center;" col width = "20%">₹ {{ item_price }}</td>
+						<td style="text-align:center;">
+							<a href="{{ url_for('.delete_product', code=session['cart_item'][key]['code']) }}" class="btnRemoveAction">
+								<img src="/static/img/delete.svg" alt="Remove Item" style = "width: 50%;" />
+							</a>
+						</td>
+					</tr>
+				{% endfor %}
+				<tr>
+						<td col width = "20%"></td>
+						<td col width = "40%" style="text-align:center;"></td>
+						<td style="text-align:center;" col width = "20%">Total:</td>
+						<td  style="text-align:center;" col width = "20%"><strong>₹ {{ session['all_total_price'] }}<strong></td>
+						
+					</tr>
+			</tbody>
+			</table>
+			
+			<tr class="bottom_button">
+                <td style = "margin-top: 5%;">
+                  <a class="btn_1" href="{{ url_for('.empty_cart') }}" style = 'background-color: #ff0000; margin-top: 5%; color: #FFFFFF;'>Empty Cart</a>
+                </td>
+                <td></td>
+                <td></td>
+                <td>
+                  <div class="cupon_text float-right" style = "margin-top: 5%;">
+                    <a class="btn_1" href="/shop/checkout">Proceed to Checkout</a>
+                  </div>
+                </td>
+            </tr>
+            {% else: %}
+            <h3 style = "padding: 10% 0; text-align: center; color: #b1b1b1;"> Your cart is empty </h3>
+			{% endif %}
+	</div>
+  </section>
+  <!--================End Cart Area =================-->
+
+
+    <!-- jquery plugins here-->
+    <!-- jquery -->
+    <script src="{{ url_for('static', filename='js/jquery-1.12.1.min.js') }}"></script>
+    <!-- popper js -->
+    <script src="{{ url_for('static', filename='js/popper.min.js') }}"></script>
+    <!-- bootstrap js -->
+    <script src="{{ url_for('static', filename='js/bootstrap.min.js') }}"></script>
+    <!-- easing js -->
+    <script src="{{ url_for('static', filename='js/jquery.magnific-popup.js') }}"></script>
+    <!-- swiper js -->
+    <script src="{{ url_for('static', filename='js/swiper.min.js') }}"></script>
+    <!-- swiper js -->
+
+    <!-- particles js -->
+    <script src="{{ url_for('static', filename='js/owl.carousel.min.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/jquery.nice-select.min.js') }}"></script>
+    <!-- slick js -->
+    <script src="{{ url_for('static', filename='js/slick.min.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/jquery.counterup.min.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/waypoints.min.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/contact.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/jquery.ajaxchimp.min.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/jquery.form.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/jquery.validate.min.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/mail-script.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/stellar.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/price_rangs.js') }}"></script>
+    <!-- custom js -->
+    <script src="{{ url_for('static', filename='js/custom.js') }}"></script>
+</body>
+
